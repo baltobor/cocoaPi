@@ -63,3 +63,4 @@ Good luck!
 
 More information:
 http://wiki.gnustep.org/index.php/GNUstep_under_Ubuntu_Linux
+http://blog.tlensing.org/2013/02/24/objective-c-on-linux-setting-up-gnustep-clang-llvm-objective-c-2-0-blocks-runtime-gcd-on-ubuntu-12-04/
