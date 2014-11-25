@@ -58,3 +58,8 @@ start the script with
 
 
 Good luck!
+
+
+
+More information:
+http://wiki.gnustep.org/index.php/GNUstep_under_Ubuntu_Linux
