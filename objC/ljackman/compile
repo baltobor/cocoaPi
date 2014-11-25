@@ -1,0 +1,20 @@
+#!/bin/sh
+
+INC_FLAG=`gnustep-config --variable=GNUSTEP_SYSTEM_HEADERS`
+LIB_FLAG=`gnustep-config --variable=GNUSTEP_SYSTEM_LIBRARIES`
+
+clang -o main main.m \
+    -I $INC_FLAG \
+    -L $LIB_FLAG \
+    \
+    -fblocks \
+    -fobjc-arc \
+    -fconstant-string-class=NSConstantString \
+    -fobjc-nonfragile-abi \
+    -D_NATIVE_OBJC_EXCEPTIONS \
+    \
+    -pthread \
+    -lgnustep-base \
+    -ldispatch \
+    -lgnustep-gui \
+    -lobjc \
