@@ -1,1 +1,2 @@
-clang `gnustep-config --objc-flags` -o main -x objective-c main.m -fconstant-string-class=NSConstantString -fobjc-nonfragile-abi -fblocks -lgnustep-base -lgnustep-gui -ldispatch -I/usr/include/GNUstep -L/usr/lib/GNUstep
+clang `gnustep-config --objc-flags` `gnustep-config --objc-libs`  -fobjc-nonfragile-abi -fobjc-runtime=gnustep -fblocks -lobjc -fobjc-arc -ldispatch -lgnustep-base -lgnustep-gui  main.m
+
