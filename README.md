@@ -37,7 +37,8 @@ sudo apt-get install build-essential clang libblocksruntime-dev libkqueue-dev li
 - Problem with include path while compiling test program in objC/arc_test<br/>
  GMUstep base tries to include <objc/blocks_runtime.h> 
 
-    _Create symbolic link:_ ```sudo ln -s /usr/local/include/GNUstep/objc /usr/local/include/GNUstep/ObjectiveC2```
+    _Create symbolic link:_ 
+    ```sudo ln -s /usr/local/include/GNUstep/objc /usr/local/include/GNUstep/ObjectiveC2```
 
  or patch file:
 
