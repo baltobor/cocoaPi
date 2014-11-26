@@ -35,7 +35,7 @@ sudo apt-get install build-essential clang libblocksruntime-dev libkqueue-dev li
 - GNUstep base V0.22.0<br/>
 - GNUstep back<br/>
 - Problem with include path while compiling test program in objC/arc_test<br/>
- GMUstep base tries to include <objc/blocks_runtime.h> 
+ GMUstep base tries to ```#include <objc/blocks_runtime.h>```
 
   _Create symbolic link:_ 
   ```
