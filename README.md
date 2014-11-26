@@ -20,6 +20,9 @@ After cloning this git repository you will see certain folders which are describ
 - tools<br/>
   _This folder contains useful tools and ports for use with raspberry pi._
 
+- patches<br/>
+  _If installation scripts need to patch files, you'll find the patch files here_
+
 # Manual installation hints
 
 ## raspbian image (2014-09-12)
