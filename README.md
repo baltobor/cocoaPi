@@ -27,7 +27,9 @@ After cloning this git repository you will see certain folders which are describ
 
 ## raspbian image (2014-09-12)
 - Installation<br/>
-    sudo apt-get install build-essential clang libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev gobjc libxml2-dev libjpeg-dev libtiff-dev libpng12-dev libcups2-dev libfreetype6-dev libcairo2-dev libxt-dev libgl1-mesa-dev gnustep-make libdispatch-dev libgnustep-base-dev libobjc4 libobjc2 gnustep-examples gnustep-base-common gnustep-back-common gnustep-devel gnustep-gui-common libgnustep-base-dev libgnustep-gui-dev
+```
+sudo apt-get install build-essential clang libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev gobjc libxml2-dev libjpeg-dev libtiff-dev libpng12-dev libcups2-dev libfreetype6-dev libcairo2-dev libxt-dev libgl1-mesa-dev gnustep-make libdispatch-dev libgnustep-base-dev libobjc4 libobjc2 gnustep-examples gnustep-base-common gnustep-back-common gnustep-devel gnustep-gui-common libgnustep-base-dev libgnustep-gui-dev
+```
 
 - GNUstep make<br/>
 - GNUstep base V0.22.0<br/>
