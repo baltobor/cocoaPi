@@ -44,21 +44,21 @@ sudo apt-get install build-essential clang libblocksruntime-dev libkqueue-dev li
 
  or patch file:
 
-```
-Index: core/base/Headers/GNUstepBase/GSVersionMacros.h 
-=================================================================== 
---- core/base/Headers/GNUstepBase/GSVersionMacros.h	(revision 35202) 
-+++ core/base/Headers/GNUstepBase/GSVersionMacros.h	(working copy) 
-@@ -284,7 +284,9 @@ 
-*/ 
- #if __has_feature(blocks) 
- #  if	OBJC2RUNTIME 
--#    include <objc/blocks_runtime.h> 
-+#    ifndef __APPLE__ 
-+#      include <objc/blocks_runtime.h> 
-+#    endif 
- #  else 
- #    include <ObjectiveC2/blocks_runtime.h> 
- #  endif 
-```
+  ```
+  Index: core/base/Headers/GNUstepBase/GSVersionMacros.h 
+  =================================================================== 
+  --- core/base/Headers/GNUstepBase/GSVersionMacros.h	(revision 35202) 
+  +++ core/base/Headers/GNUstepBase/GSVersionMacros.h	(working copy) 
+  @@ -284,7 +284,9 @@ 
+  */ 
+   #if __has_feature(blocks) 
+   #  if	OBJC2RUNTIME 
+  -#    include <objc/blocks_runtime.h> 
+  +#    ifndef __APPLE__ 
+  +#      include <objc/blocks_runtime.h> 
+  +#    endif 
+   #  else 
+   #    include <ObjectiveC2/blocks_runtime.h> 
+   #  endif 
+  ```
 
