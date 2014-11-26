@@ -1,275 +1,201 @@
-#!/bin/sh
-
-# configure URL's
-gnustepMakeURL="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-make-2.6.6.tar.gz"
-gnustepBaseURL="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-base-1.24.7.tar.gz"
-gnustepGuiURL="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-gui-0.24.0.tar.gz"
-gnustepBackURL="ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-back-0.24.0.tar.gz"
-libObjC2URL="http://download.gna.org/gnustep/libobjc2-1.7.tgz"
-
-# Everything else should happen automatically 
-gnustepMakeArchive=$(basename $gnustepMakeURL)
-gnustepBaseArchive=$(basename $gnustepBaseURL)
-gnustepGuiArchive=$(basename $gnustepGuiURL)
-gnustepBackArchive=$(basename $gnustepBackURL)
-libObjC2Archive=$(basename $libObjC2URL)
-
-gnustepMakeFolder=${gnustepMakeArchive%.tar.gz}
-gnustepBaseFolder=${gnustepBaseArchive%.tar.gz}
-gnustepGuiFolder=${gnustepGuiArchive%.tar.gz}
-gnustepBackFolder=${gnustepBackArchive%.tar.gz}
-libObjC2Folder=${libObjC2Archive%.tgz}
-
-# Download and uncompress GNUstep
-if [ ! -d $gnustepMakeFolder ];
+echo "************************************"
+echo "*** Objective C for Raspberry Pi ***"
+echo "***     Easy install script      ***"
+echo "*** (c) 2014 by Jacek Wisniowski ***"
+echo "***         MIT License          ***"
+echo "************************************"
+echo ""
+echo "************************************"
+echo "***        Compiler info:        ***"
+export CC=clang  
+export CXX=clang++
+source ~/.bashrc
+clang -v
+clang++ -v
+echo "* should be clang  version 3.0-6.2 *"
+echo "*             or above             *"
+echo "************************************"
+echo ""
+sudo apt-get install build-essential git subversion ninja cmake libffi-dev libxml2-dev libgnutls-dev libicu-dev libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev autoconf libtool
+# is libdispatch already cloned?
+if [ ! -d libdispatch ];
 then
-	wget $gnustepMakeURL
+	echo "************************************"
+	echo "***     Cloning libdispatch      ***"
+	echo "***     by Nick  Hutchinson      ***"
+	echo "************************************"
+	git clone git://github.com/nickhutchinson/libdispatch.git
 	if [ "$?" = "0" ];
 	then
-
-		echo "Success"
-		tar xvfz $gnustepMakeArchive
-		if [ "$?" = "0" ];
-		then
-			rm $gnustepMakeArchive
-		else
-			echo "Error: Could not uncompress GNUstep-Make!" 1>&2
-                	exit 1
-		fi
+		echo "OK"
 	else
 
-		echo "Error: Could not download GNUstep-Make!" 1>&2
+		echo "Error: Could not clone libdispatch by Nick Hutchinson!" 1>&2
 		exit 1
 	fi
 fi
 
-if [ ! -d $gnustepBaseFolder ];
+# is gnustep checked out?
+if [ ! -d core ];
 then
-        wget $gnustepBaseURL
-        if [ "$?" = "0" ];
-        then
-
-                echo "Success"
-                tar xvfz $gnustepBaseArchive
-                if [ "$?" = "0" ];
-                then
-                        rm $gnustepBaseArchive
-                else
-                        echo "Error: Could not uncompress GNUstep-Base!" 1>&2
-                        exit 1
-                fi
-        else
-
-                echo "Error: Could not download GNUstep-Base!" 1>&2
-                exit 1
-        fi
-fi
-
-if [ ! -d $gnustepGuiFolder ];
-then
-        wget $gnustepGuiURL
-        if [ "$?" = "0" ];
-        then
-
-                echo "Success"
-                tar xvfz $gnustepGuiArchive
-                if [ "$?" = "0" ];
-                then
-                        rm $gnustepGuiArchive
-                else
-                        echo "Error: Could not uncompress GNUstep-Gui!" 1>&2
-                        exit 1
-                fi
-        else
-
-                echo "Error: Could not download GNUstep-Gui!" 1>&2
-                exit 1
-        fi
-fi
-
-if [ ! -d $gnustepBackFolder ];
-then
-        wget $gnustepBackURL
-        if [ "$?" = "0" ];
-        then
-
-                echo "Success"
-                tar xvfz $gnustepBackArchive
-                if [ "$?" = "0" ];
-                then
-                        rm $gnustepBackArchive
-                else
-                        echo "Error: Could not uncompress GNUstep-Back!" 1>&2
-                        exit 1
-                fi
-        else
-
-                echo "Error: Could not download GNUstep-Back!" 1>&2
-                exit 1
-        fi
-fi
-
-
-if [ ! -d $libObjC2Folder ];
-then
-        wget $libObjC2URL
-        if [ "$?" = "0" ];
-        then
-
-                echo "Success"
-                tar xvfz $libObjC2Archive
-                if [ "$?" = "0" ];
-                then
-                        rm $libObjC2Archive
-                else
-                        echo "Error: Could not uncompress libObjC2!" 1>&2
-                        exit 1
-                fi
-        else
-
-                echo "Error: Could not download libObjC2!" 1>&2
-                exit 1
-        fi
-fi
-
-echo "*****************************"
-echo "*** Building GNUstep Make ***"
-echo "*****************************"
-
-export CC=clang
-
-cd $gnustepMakeFolder
-./configure --enable-objc-nonfragile-abi
-if [ "$?" = "0" ];
-then
-	sudo make install	
-        if [ "$?" != "0" ];
+	echo "************************************"
+	echo "***  Checking out  gnustep core  ***"
+	echo "************************************"
+	svn co http://svn.gna.org/svn/gnustep/modules/core
+	if [ "$?" = "0" ];
 	then
-		echo "Error: Could not install GNUstep Make!" 1>&2
-        	exit 1
-	fi 
-else
-	echo "Error: Could not configure GNUstep Make!" 1>&2
-        exit 1
-fi
-cd ..
+		echo "OK"
+	else
 
-echo "**************************"
-echo "*** Building libObjC2  ***"
-echo "**************************"
+		echo "Error: Could not checkout gnustep core!" 1>&2
+		exit 1
+	fi
+fi
+
+# is libobjc2 checked out?
+if [ ! -d libobjc2 ];
+then
+	echo "************************************"
+	echo "***     Checking out libobjc2    ***"
+	echo "************************************"
+	svn co http://svn.gna.org/svn/gnustep/libs/libobjc2/trunk libobjc2
+	if [ "$?" = "0" ];
+	then
+		echo "OK"
+	else
+
+		echo "Error: Could not checkout libobjc2!" 1>&2
+		exit 1
+	fi
+fi
+
+echo "************************************"
+echo "***    Building GNUstep make    ***"
+echo "************************************"
+cd core/make/
+./configure --enable-objc-nonfragile-abi
+if [ ! "$?" = "0" ];
+then
+	echo "Error: could not configure GNUstep base!" 1>&2
+	exit 1
+fi
+sudo make install
+if [ ! "$?" = "0" ];
+then
+	echo "Error: could not install GNUstep make!" 1>&2
+	exit 1
+fi
+
+cd ../..
 
 export CC=clang
-
-cd $libObjC2Folder
-make
-if [ "$?" = "0" ];
+echo "************************************"
+echo "***      Compiling libobjc2      ***"
+echo "************************************"
+cd libobjc2
+mkdir build
+cd build
+cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+if [ ! "$?" = "0" ];
 then
-        sudo make install       
-        if [ "$?" != "0" ];
-        then
-                echo "Error: Could not install libObjC2!" 1>&2
-                exit 1
-        fi 
-else
-        echo "Error: Could not compile libObjC2!" 1>&2
-        exit 1
+	echo "Error: could not make libobjc2. cmake failed!" 1>&2
+	#exit 1
 fi
-cd ..
+make -j1 # -jn number of CPU's
+if [ ! "$?" = "0" ];
+then
+	echo "Error: could not make libobjc2. make command failed!" 1>&2
+	#exit 1
+fi
+sudo -E make install
+if [ ! "$?" = "0" ];
+then
+	echo "Error: could not install libobjc2!" 1>&2
+	#exit 1
+fi
+cd ../..
+pwd
 
-echo "******************************"
-echo "*** Repeating GNUstep Make ***"
-echo "******************************"
-cd $gnustepMakeFolder
+echo "************************************"
+echo "***    Compiling GNUstep core    ***"
+echo "************************************"
+cd core/make
+./configure --enable-debug-by-default --with-layout=gnustep --enable-objc-nonfragile-abi
+if [ ! "$?" = "0" ];
+then
+	echo "Error: could not configure GNUstep core!" 1>&2
+	exit 1
+fi
+make && sudo -E make install
+if [ ! "$?" = "0" ];
+then
+	echo "Error: could not make or install GNUstep core!" 1>&2
+	exit 1
+fi
+echo ". /usr/GNUstep/System/Library/Makefiles/GNUstep.sh" >> ~/.bashrc
+source ~/.bashrc
+cd ../..
+
+
+#/usr/lib/gcc/arm-linux-gnueabihf/4.6/libobjc.a
+#/usr/lib/arm-linux-gnueabihf/libobjc.so.2
+#export LD_LIBRARY_PATH=/usr/lib/arm-linux-gnueabihf/
+#echo "export LD_LIBRARY_PATH=/usr/lib/:/usr/local/lib" >> ~/.bashrc
+#sudo ln -s /usr/lib/gcc/arm-linux-gnueabihf/4.6/include/objc/ /usr/local/include/objc
+sudo /sbin/ldconfig
+
+echo "************************************"
+echo "***    Compiling GNUstep base    ***"
+echo "************************************"
+cd core/base/
 ./configure --enable-objc-nonfragile-abi
-if [ "$?" = "0" ];
+if [ ! "$?" = "0" ];
 then
-        sudo make install       
-        if [ "$?" != "0" ];
-        then
-                echo "Error: Could not install GNUstep Make!" 1>&2
-                exit 1
-        fi 
-else
-        echo "Error: Could not configure GNUstep Make!" 1>&2
-        exit 1
+	echo "Error: could not configure GNUstep base!" 1>&2
+	exit 1
 fi
-cd ..
-
-echo "*****************************"
-echo "*** Building GNUstep Base ***"
-echo "*****************************"
-cd $gnustepBaseFolder
-./configure --enable-objc-nonfragile-abi
-if [ "$?" = "0" ];
+make -j1 #number of CPUs
+if [ ! "$?" = "0" ];
 then
-        make        
-        if [ "$?" != "0" ];
-        then
-                echo "Error: Could not compile GNUstep Base!" 1>&2
-                exit 1
-        fi 
-	sudo make install
-	if [ "$?" != "0" ];
-        then
-                echo "Error: Could not install GNUstep Base!" 1>&2
-                exit 1
-        fi 
-else
-        echo "Error: Could not configure GNUstep Base!" 1>&2
-        exit 1
+	echo "Error: could not make GNUstep base!" 1>&2
+	exit 1
 fi
-cd ..
-
-export LD_LIBRARY_PATH=/usr/local/lib/
-echo "****************************"
-echo "*** Building GNUstep Gui ***"
-echo "****************************"
-cd $gnustepGuiFolder
-./configure
-if [ "$?" = "0" ];
+sudo -E make install
+if [ ! "$?" = "0" ];
 then
-        make
-        if [ "$?" != "0" ];
-        then
-                echo "Error: Could not compile GNUstep Gui!" 1>&2
-                exit 1
-        fi 
-        sudo make install
-        if [ "$?" != "0" ];
-        then
-                echo "Error: Could not install GNUstep Gui!" 1>&2
-                exit 1
-        fi 
-else
-        echo "Error: Could not configure GNUstep Gui!" 1>&2
-        exit 1
+	echo "Error: could not install GNUstep base!" 1>&2
+	exit 1
 fi
-cd ..
+cd ../..
 
-echo "*****************************"
-echo "*** Building GNUstep Back ***"
-echo "*****************************"
-cd $gnustepBackFolder
-./configure
-if [ "$?" = "0" ];
+echo "************************************"
+echo "***    Compiling  libdispatch    ***"
+echo "************************************"
+cd ~/libdispatch
+sh autogen.sh
+./configure CFLAGS="-I/usr/include/kqueue" LDFLAGS="-lkqueue -lpthread_workqueue -pthread -lm"
+make -j1 #num CPUs
+if [ ! "$?" = "0" ];
 then
-        make
-        if [ "$?" != "0" ];
-        then
-                echo "Error: Could not compile GNUstep Back!" 1>&2
-                exit 1
-        fi 
-        sudo make install
-        if [ "$?" != "0" ];
-        then
-                echo "Error: Could not install GNUstep Back!" 1>&2
-                exit 1
-        fi 
-else
-        echo "Error: Could not configure GNUstep Back!" 1>&2
-        exit 1
+	echo "Error: could not make libdispatch!" 1>&2
+	exit 1
 fi
-cd ..
+sudo -E make install
+if [ ! "$?" = "0" ];
+then
+	echo "Error: could not install libdispatch!" 1>&2
+	exit 1
+fi
+sudo ldconfig
 
-echo "### GNUstep was compiled and installed successfully! ###""
+echo "****************************************"
+echo "*** READY. Please try testprogram in ***"
+echo "***      cocoaPi/objC/arc_test       ***"
+echo "***            Good luck!            ***"
+echo "****************************************"
 
+
+
+# Install compile in .bashrc
+echo "export CC=clang"  >> ~/.bashrc
+echo "export CXX=clang++" >> ~/.bashrc
