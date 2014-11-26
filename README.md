@@ -25,9 +25,11 @@ After cloning this git repository you will see certain folders which are describ
 
 # Manual installation hints
   Put the GNUstep shell script into your startup script after installation:
-  ```/usr/share/GNUstep/Makefiles/GNUstep.sh”```
-  Put this line in your profile at startup by adding it to ~/.bashrc 
   ```
+  /usr/share/GNUstep/Makefiles/GNUstep.sh 
+  ```
+  Put this line in your profile at startup by adding it to ~/.bashrc 
+  
 ## raspbian image (2014-09-12)
 - Installation<br/>
   ```
