@@ -24,13 +24,13 @@ After cloning this git repository you will see certain folders which are describ
   _If installation scripts need to patch files, you'll find the patch files here_
 
 # Manual installation hints
-Put the GNUstep shell script into your startup script:
+  Put the GNUstep shell script into your startup script after installation:
   ```/usr/share/GNUstep/Makefiles/GNUstep.sh”```
   Put this line in your profile at startup by adding it to ~/.bashrc 
-
+  ```
 ## raspbian image (2014-09-12)
 - Installation<br/>
-```
+
 sudo apt-get install build-essential clang libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev gobjc libxml2-dev libjpeg-dev libtiff-dev libpng12-dev libcups2-dev libfreetype6-dev libcairo2-dev libxt-dev libgl1-mesa-dev gnustep-make libdispatch-dev libgnustep-base-dev libobjc4 libobjc2 gnustep-examples gnustep-base-common gnustep-back-common gnustep-devel gnustep-gui-common libgnustep-base-dev libgnustep-gui-dev
 ```
 
