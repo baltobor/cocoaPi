@@ -16,7 +16,7 @@ echo "* should be clang  version 3.0-6.2 *"
 echo "*             or above             *"
 echo "************************************"
 echo ""
-sudo apt-get install build-essential git subversion ninja cmake libffi-dev libxml2-dev libgnutls-dev libicu-dev libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev autoconf libtool
+sudo apt-get install build-essential clang git subversion ninja cmake libffi-dev libxml2-dev libgnutls-dev libicu-dev libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev autoconf libtool libjpeg-dev libtiff-dev libpng12-dev libcups2-dev libfreetype6-dev libcairo2-dev libxt-dev libgl1-mesa-dev
 # is libdispatch already cloned?
 if [ ! -d libdispatch ];
 then
@@ -99,19 +99,19 @@ cmake .. -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 if [ ! "$?" = "0" ];
 then
 	echo "Error: could not make libobjc2. cmake failed!" 1>&2
-	#exit 1
+	exit 1
 fi
 make -j1 # -jn number of CPU's
 if [ ! "$?" = "0" ];
 then
 	echo "Error: could not make libobjc2. make command failed!" 1>&2
-	#exit 1
+	exit 1
 fi
 sudo -E make install
 if [ ! "$?" = "0" ];
 then
 	echo "Error: could not install libobjc2!" 1>&2
-	#exit 1
+	exit 1
 fi
 cd ../..
 pwd
