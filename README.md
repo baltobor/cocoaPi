@@ -61,4 +61,5 @@ sudo apt-get install build-essential clang libblocksruntime-dev libkqueue-dev li
    #    include <ObjectiveC2/blocks_runtime.h> 
    #  endif 
   ```
+  For more information see: http://gnustep.8.n7.nabble.com/bug-36650-base-tries-to-include-lt-objc-blocks-runtime-h-gt-with-Apple-runtime-td21824.html
 
