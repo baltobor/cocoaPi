@@ -3,8 +3,9 @@
 **cocoaPi** contains example code and tutorials on how to use objectiveC, GNUstep and ARC on RaspberryPi. This archive was created for a presentation at cocoaHeads Aachen:<br/>
 - http://hci.rwth-aachen.de/cocoaheads
 
-If you are next to Aachen and would like to meet interesting people cisit us at Digitac:<br/>
+If you are next to Aachen and would like to meet interesting people visit us at Digitac:<br/>
 - http://digitac.cc
+- http://facebook.com/DigitalesAachen
 
 
 # How does it work?
