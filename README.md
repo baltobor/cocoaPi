@@ -7,10 +7,10 @@ If you are next to Aachen and would like to meet interesting people visit us at 
 - http://digitac.cc
 - http://facebook.com/DigitalesAachen
 
-# INstall project Center and gorm (maybe the simplest way to install)
+# Install project Center and gorm (maybe the simplest way to install)
 
 - works with windowmanager: startx
-- Installation: sudo apt-get projectcenter.app gorm.app
+- Installation: sudo apt-get install projectcenter.app gorm.app
 
 # How does it work?
 
