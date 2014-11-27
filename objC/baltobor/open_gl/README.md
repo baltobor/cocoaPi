@@ -1,21 +1,23 @@
-= How to prepare raspberryPi for this program:
+**HINT:** This project was just uploaded and was not tested yet. Please wait until this hint is removed before you test.
 
-1. update: sudo apt-get update
-2. sudo apt-get install base-devel
-3. sudo apt-get install gnustep
-4. sudo apt-get install build-essential
-5. sudo apt-get install gobjc
-6. sudo apt-get install gcc
-7. sudo apt-get install libpng
-8. sudo apt-get install wiringpi	
+# How to prepare raspberryPi for this program:
+
+- update: sudo apt-get update
+- sudo apt-get install base-devel
+- sudo apt-get install gnustep
+- sudo apt-get install build-essential
+- sudo apt-get install gobjc
+- sudo apt-get install gcc
+- sudo apt-get install libpng
+- sudo apt-get install wiringpi	
 
 	
-9. For font-Support install
+- For font-Support install
 	sudo apt-get install freetype2
 	sudo apt-get install ttf-ubuntu-font-family
 
 
-= Prepare userland and libs
+# Prepare userland and libs
 
 compile ilclientlib.
 extract objects with ar -x libilclient.a
