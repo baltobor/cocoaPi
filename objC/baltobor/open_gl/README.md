@@ -1,4 +1,4 @@
-**HINT:** This project was just uploaded and was not tested yet. Please wait until this hint is removed before you test.
+**HINT:** This project is tested and works with arch linux. Testing and tutorial for raspbian must be done. 
 
 # How to prepare raspberryPi for this program:
 
