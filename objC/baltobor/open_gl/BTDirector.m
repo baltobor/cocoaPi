@@ -13,11 +13,12 @@ unsigned int right_button = 3;
 
 // open gl scene renderer
 #import "BTDirector.h"
+#import "BTHelpers.h"
 
 
 #include <wiringPi.h>			// gpio interface
 #include <wiringPiI2C.h>		// i2c interface
-#include <bcm2835.h>
+#include <bcm2835.h>			// spi_interface
 #include <wiringSerial.h>		// RS232 interface
 
 
@@ -106,6 +107,8 @@ void* gpioHandler(void* arg) {
 	int blinker = 0;
 	bool ledState = NO;
 
+	bool debounce[20];
+
 	while(self->gpioThreadEnabled) {
 
 		blinker++;
@@ -175,64 +178,61 @@ void* gpioHandler(void* arg) {
 			}			
 						
 			
-			switch (buttonId) {
-				
-				case left_button: {
+			if (buttonId == left_button) {
 					
-					if (pushAction) {
-						
-						go_left = YES;
-					}
+				if (pushAction) {
 					
-					if (releaseAction) {
+					self->go_left = YES;
+				}
+					
+				if (releaseAction) {
 						
-						go_left = NO;
-					}
-				} break;
+					self->go_left = NO;
+				}
+			}
 				
-				case right_button: {
+			if (buttonId == right_button) {
 									
-					if (pushAction) {
+				if (pushAction) {
 					
-						go_right = YES;	
-					}					
+					self->go_right = YES;	
+				}					
 					
-					if (releaseAction) {
+				if (releaseAction) {
 						
-						go_right = NO;	
-					}	
-				} break;
+					self->go_right = NO;	
+				}	
+			}
 
-				case up_button: {
+			if (buttonId == up_button) {
 						
-					if (pushAction) {
+				if (pushAction) {
 						
-						go_up = YES;
-					}
+					self->go_up = YES;
+				}
 					
-					if (releaseAction) {
+				if (releaseAction) {
 											
-						go_up = NO;				
-					}				
-				} break;
+					self->go_up = NO;				
+				}				
+			}
 				
-				case down_button: {
+			if (buttonId == down_button) {
 				
-					if (pushAction) {
+				if (pushAction) {
 						
-						go_down = YES;
-					}
+					self->go_down = YES;
+				}
 					
-					if (releaseAction) {
+				if (releaseAction) {
 						
-						go_down = NO;
-					}			
-				} break;												
-			}				
+					self->go_down = NO;
+				}			
+			}																
 		}		 
 														 								
 		usleep(100000); self->ticksCounter++;
-		
+	}
 			
 	RELEASE(pool);
 	
@@ -274,7 +274,7 @@ void* gpioHandler(void* arg) {
 
 -(void) buildScene {
     
-    int i
+    int i;
     
     self->presentationState = BT_STATE_START;
         
@@ -317,8 +317,8 @@ void* gpioHandler(void* arg) {
 
 +(BTDirector*) director {
     
-    BTDirector* director = [[BTRegie alloc] init];
-    diretor->exit = NO;
+    BTDirector* director = [[BTDirector alloc] init];
+    director->exit = NO;
     [director buildScene];
     
     return [director autorelease];
@@ -329,16 +329,18 @@ void* gpioHandler(void* arg) {
 */
 -(void) renderAtTime:(NSTimeInterval)t {
     
-    int i      
+    int i;   
            
     switch (self->presentationState) {
         case BT_STATE_START: {
 
+			int dir = -1;
 			for (i = 0; i < DEBRIS_COUNT; i++) {
 				
-				debrisVelocityX[i] = rand() * VELOCITY_MAX / RAND_MAX;
-				debrisVelocityY[i] = rand() * VELOCITY_MAX / RAND_MAX;
-				debrisRotVel[i] =  = rand() * VELOCITY_MAX / RAND_MAX;
+				dir *= -1;
+				debrisVelocityX[i] = rand() * VELOCITY_MAX * dir / RAND_MAX;
+				debrisVelocityY[i] = rand() * VELOCITY_MAX * dir / RAND_MAX;
+				debrisRotVel[i]    = rand() * VELOCITY_MAX / RAND_MAX;
 			}
 
             self->lastTime = t;
@@ -349,29 +351,31 @@ void* gpioHandler(void* arg) {
         case BT_STATE_MOVE_DEBRIS: {
             
             for (i = 0; i < DEBRIS_COUNT; i++) {
+	            	            
+	            self->spaceDebris[i]->pos_x += debrisVelocityX[i];
+	            self->spaceDebris[i]->pos_y += debrisVelocityY[i];
+	            self->spaceDebris[i]->rotation += debrisRotVel[i];
 	            
-	            self->spaceDebris[i].posX += debrisVelocityX[i];
-	            self->spaceDebris[i].posY += debrisVelocityY[i];
-	            self->spaceDebris[i].rotation += debrisRotVel[i];
-	            
-	            if (self->spaceDebris[i].posX < 0) {
+	            	            
+	            if (self->spaceDebris[i]->pos_x > BTWidth / 2.) {
 		            
-		            self->spaceDebris[i].posX += BTWidth;
+		            self->spaceDebris[i]->pos_x = -BTWidth / 2;
 	            }
 	            
-	            if (self->spaceDebris[i].posX > BTWidth) {
+	            if (self->spaceDebris[i]->pos_x < -BTWidth / 2.) {
 		            
-		            self->spaceDebris[i].posX -= BTWidth;
+		            self->spaceDebris[i]->pos_x = BTWidth / 2;
+	            }
+	            	           
+	            
+	            if (self->spaceDebris[i]->pos_y > BTHeight / 2.) {
+		            
+		            self->spaceDebris[i]->pos_y = -BTHeight / 2;
 	            }
 	            
-	            if (self->spaceDebris[i].posY < 0) {
+	            if (self->spaceDebris[i]->pos_y < -BTHeight / 2.) {
 		            
-		            self->spaceDebris[i].posY += BTHeight;
-	            }
-	            
-	            if (self->spaceDebris[i].posY > BTWidth) {
-		            
-		            self->spaceDebris[i].posY -= BTHeight;
+		            self->spaceDebris[i]->pos_y = BTHeight / 2;
 	            }
 	        }
         } break;                

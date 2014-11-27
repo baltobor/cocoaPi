@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Categories=X-GNUstep;
+Exec=/usr/sbin/openapp open_gl
+FilePattern=open_gl.app;open_gl;

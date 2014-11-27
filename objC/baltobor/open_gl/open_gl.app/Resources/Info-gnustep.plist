@@ -1,0 +1,7 @@
+{
+  NOTE = "Automatically generated, do not edit!";
+  NSExecutable = "open_gl";
+  NSMainNibFile = "";
+  GSMainMarkupFile = "";
+  NSPrincipalClass = "NSApplication";
+}

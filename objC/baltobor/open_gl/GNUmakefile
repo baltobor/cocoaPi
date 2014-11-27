@@ -2,9 +2,9 @@ include $(GNUSTEP_MAKEFILES)/common.make
 
 APP_NAME = open_gl
 open_gl_HEADERS = BTConstants.h BTAppKit.h BTHelpers.h BTAtom.h BTBackground.h BTSprite.h BTDirector.h
-open_gl_OBJC_FILES = main.m BTAppKit.m BTHelpers.m BTGlobals.m BTAtom.m BTBackground.m BTSprite.m BTRegie.m
+open_gl_OBJC_FILES = main.m BTAppKit.m BTHelpers.m BTAtom.m BTBackground.m BTSprite.m BTDirector.m
 
-open_gl_RESOURCE_FILES = images/darth@2x.png images/debris@2x.png
+open_gl_RESOURCE_FILES = images/earth.png images/debris.png
  
 # -std=c99 is needed for declaring vars infide for loop i.e. for (int i; ...) (else i must be declared outside) (conflicting with vcos, don't use here)
 open_gl_CPPFLAGS = $(RUNTIME_DEFINE) -I/opt/vc/include/ -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux/ -lbcm2835

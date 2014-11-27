@@ -11,8 +11,8 @@
 #define BT_STATE_START 0
 #define BT_STATE_MOVE_DEBRIS 1
 
-#define DEBRIS_COUNT 4
-#define VELOCITY_MAX 20.0
+#define DEBRIS_COUNT 12
+#define VELOCITY_MAX 10.0
 
 
 @interface BTDirector : BTAtom {

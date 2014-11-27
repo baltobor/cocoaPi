@@ -3,7 +3,7 @@
 //
 //  Created by Jacek Wisniowski on 10.05.13.
 //
-#import "BTBTHelpers.h"
+#import "BTHelpers.h"
 #import "BTConstants.h"
 
 @implementation BTHelpers
