@@ -1,6 +1,11 @@
 **HINT:** This project is actually not working properly. Please wait until this hint is removed before you test otherwise your raspberry sd-card image could be damaged.
 
-**cocoaPi** contains example code and tutorials on how to use objectiveC, GNUstep and ARC on RaspberryPi
+**cocoaPi** contains example code and tutorials on how to use objectiveC, GNUstep and ARC on RaspberryPi. This archive was created for a presentation at cocoaHeads Aachen:<br/>
+- http://hci.rwth-aachen.de/cocoaheads
+
+If you are next to Aachen and would like to meet interesting people cisit us at Digitac:<br/>
+- http://digitac.cc
+
 
 # How does it work?
 
