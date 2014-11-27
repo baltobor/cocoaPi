@@ -1,4 +1,4 @@
-= GNUstep build script
+# GNUstep build script
 
 Copyright (c) 2014 by Jacek Wisniowski
 
@@ -21,13 +21,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-== How To Use
+## How To Use
 
 THIS SCRIPT IS EXPERIMENTAL! IT IS VERY PROBABLE THAT YOUR RASPBERRY'S COMPILER
 IS NOT WORKING ANYMORE AFTER EXECUTING THIS SCRIPT. USE AT OWN RISK AND ONLY IF
 YOU REALLY KNOW WHAT YOU ARE DOING.
 
-Known Bugs: After compiling the linker is not working anymore.
+Known Bugs: After compiling the linker is not working properly.
 Maybe setting LD_LIBRAY_PATH or entries in /etc/ fixes this issue.
 Linker paths can be set in /etc/ld.so.conf.d/libc.conf? 
 
