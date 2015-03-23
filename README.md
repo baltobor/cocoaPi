@@ -21,10 +21,10 @@ This project contains some scripts and some collected examples to quickly get st
 After cloning this git repository you will see certain folders which are described as follows:
 
 - easyObjectiveC.sh<br/>
-  _Is a small script wich _apt-get_'s the needed packages for you. Depending on your version paths and files are being fixed for you._
+  _Is a small script wich _apt-get_'s the needed packages for you. Depending on your version paths and files are being fixed for you. Right now you cannot use it because raspbian is still using too old versions of clang and gcc. I think we need to wait some time until this script can be used on raspbian_
 
 - GNUstep<br/>
-  _This folder contains a script which downloads uncompresses and compiles GNUstep and libobjC2. In most cases you should not use it. Right now this script comes with this bundle for reference only. It contains some collected knowledge on how to compile GNUstep. In most cases the linker or the compiler will not work after running the script. Maybe it is necessary to change linker paths or some files in /etc afterwards. It's better not to use it if packet installation using _apt-get_ worked properly. If you like you can share your knowledge to enhance this script._
+  _This folder contains a script which downloads uncompresses and compiles GNUstep and libobjC2. On raspbian you first need to crosscompile llvm before you can use this script. This script contains some collected knowledge on how to compile GNUstep and libobjc2. You need at least llvm 3.4. This script should work with FreeBSD for raspberryPI._
 
 - objC<br/>
   _This folder contains example projects to test your objectiveC environment. I collected some source code on the internet to provide you some test files. Big thanks for this go to Tobias Lensing and ljackman. In //baltobor// you will find my examples and you will learn how to use GNUmakefiles._
