@@ -11,6 +11,7 @@ According to David Chisnall (GNUstep mailinglist) my build script in folder GNUs
 
 Here is the source of FreeBSD for Raspberry PI: https://wiki.freebsd.org/FreeBSD/arm/Raspberry%20Pi
 According to Admin magazine FreeBSD is en extremely stable linux for RaspberryPI. Therefore - for now - I will switch over to FreeBSD. (http://www.admin-magazin.de/Das-Heft/2014/03/FreeBSD-auf-Raspberry-Pi/(offset)/2)
+FreeBSD, getting started: https://fosskb.wordpress.com/2014/11/29/getting-started-with-freebsd-on-raspberry-pi/
 
 # How does it work?
 
