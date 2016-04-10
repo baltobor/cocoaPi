@@ -33,7 +33,7 @@ Linker paths can be set in /etc/ld.so.conf.d/libc.conf?
 
 This folder contains a simple script which downloads and uncompresses all
 needed GNUstep packages. Then each packet is being compiled using settings for
-obectiveC ARC with Grand Central Dispatch.
+Objective-C ARC with Grand Central Dispatch.
 
 This software comes withoud warranty and is intended for use on 
 raspberry Pi using raspbian OS.
@@ -42,12 +42,12 @@ Installing packages using apt-get is the preferred way. Pleas don't run
 this script if your compiler and objC is working.
 
 Ensure that you installed the following packages using apt-get:
-
+```
 sudo apt-get install build-essential clang libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev gobjc libxml2-dev libjpeg-dev libtiff-dev libpng12-dev libcups2-dev libfreetype6-dev libcairo2-dev libxt-dev libgl1-mesa-dev
 sudo apt-get install libdispatch-dev
 sudo apt-get install libicu-dev
 sudo apt-get install git
-
+```
 
 Your raspberry Pi should have established an internet connection.
 
